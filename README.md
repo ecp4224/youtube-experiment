@@ -60,7 +60,7 @@ to run the sample test from above.
 You can also get the "Ratio" for any youtuber by doing
 
 ```
-node experiment.js <username>
+node experiment.js <username> [video_fetch_limit:default=20]
 ```
 
 # License

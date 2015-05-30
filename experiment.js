@@ -1,17 +1,17 @@
 var http = require('https');
 //var process = require('process');
 
-var API_KEY = "API_KEY_HERE";
+var API_KEY = "AIzaSyCIAnkSpBZcHWe4WnpE8bKKyBY2nMQ7f_o";
 var VIDEO_FETCH_LIMIT = 20;
 
-var GET_VIDEOS = "https://www.googleapis.com/youtube/v3/search?key={K}&channelId={C}&part=snippet,id&order=date&maxResults=" + VIDEO_FETCH_LIMIT;
+var GET_VIDEOS = "https://www.googleapis.com/youtube/v3/search?key={K}&channelId={C}&part=snippet,id&order=date&maxResults={L}";
 var GET_CHANNEL_ID = "https://www.googleapis.com/youtube/v3/channels?key={K}&forUsername={U}&part=id";
 var GET_VIEW_COUNT = "https://www.googleapis.com/youtube/v3/videos?id={V}&part=contentDetails,statistics&key={K}";
 var GET_SUB_COUNT = "https://gdata.youtube.com/feeds/api/users/{U}?alt=json";
 
 
 var getAllVideos = function(chanellId, callback) {
-    http.get(GET_VIDEOS.replace("{K}", API_KEY).replace("{C}", chanellId), function (res) {
+    http.get(GET_VIDEOS.replace("{K}", API_KEY).replace("{C}", chanellId).replace("{L}", VIDEO_FETCH_LIMIT), function (res) {
         var data = "";
         res.on('data', function(chunk) {
             data += chunk;
@@ -190,7 +190,13 @@ if (!API_KEY || API_KEY === "API_KEY_HERE") {
 if (process.argv[2] == '-t' || process.argv[2] == '--test') {
     sampleTest();
     return;
-} else if (process.argv.length == 3) {
+} else if (process.argv.length >= 3) {
+
+    if (process.argv.length > 3) {
+        VIDEO_FETCH_LIMIT = parseInt(process.argv[3]);
+
+    }
+
     getSubscriberToViewRatio(process.argv[2], function(obj) {
         var percent = obj.ratio * 100.0;
         var rounded = Math.round(percent * 100) / 100;
