@@ -1,2 +1,43 @@
+
 # youtube-experiment
-I'm curious about the ratio of subscriber / average view count of any given channel
+This is a simple experiment that compares the average views a youtuber has and compares that 
+to the amount of subscribers they have. In an ideal world, the average view count should be 
+close to the subscriber count because subscribers are "guaranteed" views.
+
+Now, I'm no math major and I don't really know what this data really means and if I can even 
+call it accurate, but it sure is interesting.
+
+## The Results
+
+I ran this simple program against 7 of the top youtubers and 7 youtubers from my own 
+subscription I often watch. I set the video_fetch_limit to 20, so it only averaged the 
+view count of 20 videos for each youtuber. The results were quite interesting
+
+```
+Youtuber: hotdiggedydemon       Ratio: 363.34%
+Youtuber: JonTronShow           Ratio: 123.08%
+Youtuber: HolaSoyGerman         Ratio: 71.46%
+Youtuber: SecretAgentBob        Ratio: 43.36%
+Youtuber: VanossGaming          Ratio: 42.6%
+Youtuber: ashens                Ratio: 31.61%
+Youtuber: jacksfilms            Ratio: 30.24%
+Youtuber: nigahiga              Ratio: 28.77%
+Youtuber: ExtraCreditz          Ratio: 21.48%
+Youtuber: Smosh                 Ratio: 11.13%
+Youtuber: GameGrumps            Ratio: 9.25%
+Youtuber: PewDiePie             Ratio: 5.5%
+Youtuber: RayWilliamJohnson     Ratio: 5.11%
+Youtuber: Machinima             Ratio: 0.95%
+```
+
+The "Ratio" is the `averageViewCount / subscriberCount` shown as a percent.
+
+##What does this mean?
+
+I don't know! :D
+
+An educated guess I have is, a higher Ratio means higher quality of the conent. 
+
+I base this off the first 2 youtubers from the sample output. The average view count is 
+surpasing their subscriber count, meaning it's getting shared and viewed beyond their 
+subscribers.
