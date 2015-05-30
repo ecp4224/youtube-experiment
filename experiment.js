@@ -1,4 +1,5 @@
 var http = require('https');
+//var process = require('process');
 
 var API_KEY = "API_KEY_HERE";
 var VIDEO_FETCH_LIMIT = 20;
@@ -127,51 +128,77 @@ var getSubscriberToViewRatio = function(username, callback) {
     });
 };
 
-var youtubers = [
-    //top youtubers
-    "Smosh",
-    "PewDiePie",
-    "HolaSoyGerman",
-    "nigahiga",
-    "Machinima",
-    "VanossGaming",
-    "RayWilliamJohnson",
+var sampleTest = function() {
 
-    //my own subscription
-    "ExtraCreditz",
-    "ashens",
-    "SecretAgentBob",
-    "GameGrumps",
-    "hotdiggedydemon",
-    "jacksfilms",
-    "JonTronShow"
-];
 
-var sortAndDisplay = function() {
-    finalArray.sort(function(a, b) {
-        return b.ratio - a.ratio;
-    });
+    var youtubers = [
+        //top youtubers
+        "Smosh",
+        "PewDiePie",
+        "HolaSoyGerman",
+        "nigahiga",
+        "Machinima",
+        "VanossGaming",
+        "RayWilliamJohnson",
 
-    for (var t in finalArray) {
-        var percent = finalArray[t].ratio * 100.0;
+        //my own subscription
+        "ExtraCreditz",
+        "ashens",
+        "SecretAgentBob",
+        "GameGrumps",
+        "hotdiggedydemon",
+        "jacksfilms",
+        "JonTronShow"
+    ];
+
+    var sortAndDisplay = function() {
+        finalArray.sort(function(a, b) {
+            return b.ratio - a.ratio;
+        });
+
+        for (var t in finalArray) {
+            var percent = finalArray[t].ratio * 100.0;
+            var rounded = Math.round(percent * 100) / 100;
+            console.log("Youtuber: " + finalArray[t].username + "     Ratio: " + rounded + "%");
+        }
+    };
+
+    var total = 0;
+    var finalArray = [ ];
+    var callback = function(obj) {
+        finalArray.push(obj); //Add our result to the final array
+
+        if (total + 1 >= youtubers.length) { //Is this the last item?
+            sortAndDisplay(); //Sort the array and display it
+        } else {
+            total++; //Add one to total and wait for the next one
+        }
+    };
+
+    for (var i in youtubers) {
+        getSubscriberToViewRatio(youtubers[i], callback);
+    }
+};
+
+if (!API_KEY || API_KEY === "API_KEY_HERE") {
+    console.error("Please set the Youtube Data API key!");
+    console.error("Edit this file and set the variable API_KEY at the top of the file!");
+    console.error("Aborting..");
+    return;
+}
+
+if (process.argv[2] == '-t' || process.argv[2] == '--test') {
+    sampleTest();
+    return;
+} else if (process.argv.length == 3) {
+    getSubscriberToViewRatio(process.argv[2], function(obj) {
+        var percent = obj.ratio * 100.0;
         var rounded = Math.round(percent * 100) / 100;
-        console.log("Youtuber: " + finalArray[t].username + "     Ratio: " + rounded + "%");
-    }
-};
-
-var total = 0;
-var finalArray = [ ];
-var callback = function(obj) {
-    finalArray.push(obj); //Add our result to the final array
-
-    if (total + 1 >= youtubers.length) { //Is this the last item?
-        sortAndDisplay(); //Sort the array and display it
-    } else {
-        total++; //Add one to total and wait for the next one
-    }
-};
-
-for (var i in youtubers) {
-    getSubscriberToViewRatio(youtubers[i], callback);
+        console.log("Youtuber: " + obj.username + "     Ratio: " + rounded + "%");
+    });
+} else {
+    console.log("Usage:");
+    console.log("node experiment.js -t : Run the sample test");
+    console.log("node experiment.js <youtuber> : Get the ratio for a youtuber");
 }
 
