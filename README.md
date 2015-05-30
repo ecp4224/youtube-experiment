@@ -36,10 +36,10 @@ The "Ratio" is the `averageViewCount / subscriberCount` shown as a percent.
 
 I don't know! :D
 
-An educated guess I have is, a higher Ratio means higher quality of the conent. 
+An educated guess I have is, a higher Ratio means higher quality of the content. 
 
 I base this off the first 2 youtubers from the sample output. The average view count is 
-surpasing their subscriber count, meaning it's getting shared and viewed beyond their 
+surpassing their subscriber count, meaning it's getting shared and viewed beyond their 
 subscribers.
 
 # Usage
