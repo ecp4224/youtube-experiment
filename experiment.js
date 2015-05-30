@@ -1,7 +1,7 @@
 var http = require('https');
 //var process = require('process');
 
-var API_KEY = "AIzaSyCIAnkSpBZcHWe4WnpE8bKKyBY2nMQ7f_o";
+var API_KEY = "API_KEY_HERE";
 var VIDEO_FETCH_LIMIT = 20;
 
 var GET_VIDEOS = "https://www.googleapis.com/youtube/v3/search?key={K}&channelId={C}&part=snippet,id&order=date&maxResults={L}";
